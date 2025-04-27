@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React, { useRef } from "react";
@@ -30,7 +32,7 @@ const CollectionCarousel: React.FC = () => {
 
   return (
     <div className="py-10 bg-white">
-      <SliderContainer>
+      <SliderContainer className={" "}>
         <div className="relative">
           {/* Swiper Carousel */}
           <Swiper
@@ -41,6 +43,7 @@ const CollectionCarousel: React.FC = () => {
             grabCursor={true} // Adds a grabbing cursor for better UX
             resistanceRatio={0.85} // Slightly reduces resistance at edges for smoother feel
             onInit={(swiper) => {
+            
               // @ts-ignore
               swiper.params.navigation.prevEl = prevRef.current;
               // @ts-ignore

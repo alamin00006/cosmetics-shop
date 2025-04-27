@@ -16,7 +16,7 @@ const stats: Stat[] = [
 const TrustedBy: React.FC = () => {
   return (
     <div className="bg-gray-100 py-6">
-      <Container>
+      <Container className={" "}>
         <h2 className="text-center md:text-xl sm:text-base font-small text-black uppercase mb-6">
           Trusted by Our Fam!
         </h2>

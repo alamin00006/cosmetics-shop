@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import Link from "next/link";
@@ -24,7 +25,7 @@ const SquareBanner: React.FC = () => {
 
   return (
 
-    <SliderContainer>
+    <SliderContainer className={" "}>
  <Link href="/collections/buy-any-3-at-949" className="block w-full">
       {/* Desktop Image (Hidden on Mobile) */}
       <div className="hidden md:block">

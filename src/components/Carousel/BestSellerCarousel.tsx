@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React, { useRef } from "react";
@@ -5,7 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import { FaChevronLeft, FaChevronRight, FaHeart } from 'react-icons/fa';
+import { FaHeart } from "react-icons/fa";
 import SliderContainer from "../Container/SliderContainer";
 import Link from "next/link";
 
@@ -22,8 +24,8 @@ interface BestSellerlItem {
 const bestSellerlItemItems: BestSellerlItem[] = [
   {
     label: "Eveline Cosmetics Better Than Perfect Soft Matt Pressed Blush",
-    imageUrl: 'https://hokmakeup.com/cdn/shop/files/1_38fad031-0d21-454f-baa8-7e26e8f864c1.jpg?v=1745309269',
-    imageUrl2: 'https://hokmakeup.com/cdn/shop/files/2_52a563b8-979c-40f7-b1b5-2bd1618223d1.jpg?v=1745309269',
+    imageUrl: "https://hokmakeup.com/cdn/shop/files/1_38fad031-0d21-454f-baa8-7e26e8f864c1.jpg?v=1745309269",
+    imageUrl2: "https://hokmakeup.com/cdn/shop/files/2_52a563b8-979c-40f7-b1b5-2bd1618223d1.jpg?v=1745309269",
     price: "$715",
     originalPrice: "$795",
     discount: "10% OFF",
@@ -31,8 +33,8 @@ const bestSellerlItemItems: BestSellerlItem[] = [
   },
   {
     label: "Makeup Revolution Blush Icon Palette",
-    imageUrl: 'https://hokmakeup.com/cdn/shop/files/81555229535_1.jpg?v=1745309254',
-    imageUrl2: 'https://hokmakeup.com/cdn/shop/files/81555229535_2.jpg?v=1745309254',
+    imageUrl: "https://hokmakeup.com/cdn/shop/files/81555229535_1.jpg?v=1745309254",
+    imageUrl2: "https://hokmakeup.com/cdn/shop/files/81555229535_2.jpg?v=1745309254",
     price: "$716",
     originalPrice: "$795",
     discount: "10% OFF",
@@ -40,8 +42,8 @@ const bestSellerlItemItems: BestSellerlItem[] = [
   },
   {
     label: "L.A. Girl On Cloud Nine Bouncy Eyeshadow",
-    imageUrl: 'https://hokmakeup.com/cdn/shop/files/makeup-revolution-blush-icon-palette-491846.jpg?v=1745309300',
-    imageUrl2: 'https://hokmakeup.com/cdn/shop/files/makeup-revolution-blush-icon-palette-910294.webp?v=1745309300',
+    imageUrl: "https://hokmakeup.com/cdn/shop/files/makeup-revolution-blush-icon-palette-491846.jpg?v=1745309300",
+    imageUrl2: "https://hokmakeup.com/cdn/shop/files/makeup-revolution-blush-icon-palette-910294.webp?v=1745309300",
     price: "$896",
     originalPrice: "$995",
     discount: "10% OFF",
@@ -49,8 +51,8 @@ const bestSellerlItemItems: BestSellerlItem[] = [
   },
   {
     label: "L.A. Girl On Cloud Nine Bouncy Blush & Bronzer",
-    imageUrl: 'https://hokmakeup.com/cdn/shop/files/81555964986_1.jpg?v=1745309263',
-    imageUrl2: 'https://hokmakeup.com/cdn/shop/files/81555964986_2.jpg?v=1745309263',
+    imageUrl: "https://hokmakeup.com/cdn/shop/files/81555964986_1.jpg?v=1745309263",
+    imageUrl2: "https://hokmakeup.com/cdn/shop/files/81555964986_2.jpg?v=1745309263",
     price: "$896",
     originalPrice: "$995",
     discount: "10% OFF",
@@ -58,8 +60,8 @@ const bestSellerlItemItems: BestSellerlItem[] = [
   },
   {
     label: "I Heart Revolution Tropical Trip Body Cream Trio",
-    imageUrl: 'https://hokmakeup.com/cdn/shop/files/1_38fad031-0d21-454f-baa8-7e26e8f864c1.jpg?v=1745309269',
-    imageUrl2: 'https://hokmakeup.com/cdn/shop/files/2_52a563b8-979c-40f7-b1b5-2bd1618223d1.jpg?v=1745309269',
+    imageUrl: "https://hokmakeup.com/cdn/shop/files/1_38fad031-0d21-454f-baa8-7e26e8f864c1.jpg?v=1745309269",
+    imageUrl2: "https://hokmakeup.com/cdn/shop/files/2_52a563b8-979c-40f7-b1b5-2bd1618223d1.jpg?v=1745309269",
     price: "$1,350",
     originalPrice: "$1,500",
     discount: "$10% OFF",
@@ -67,8 +69,8 @@ const bestSellerlItemItems: BestSellerlItem[] = [
   },
   {
     label: "Liquid Lipstick",
-    imageUrl: 'https://hokmakeup.com/cdn/shop/files/1_ff857fec-df6e-4e6b-a63c-ee34e5ede6e0.jpg?v=1745309271',
-    imageUrl2: 'https://hokmakeup.com/cdn/shop/files/2_71ba344a-82fe-41c3-b2b1-178b119a2298.jpg?v=1745309271',
+    imageUrl: "https://hokmakeup.com/cdn/shop/files/1_ff857fec-df6e-4e6b-a63c-ee34e5ede6e0.jpg?v=1745309271",
+    imageUrl2: "https://hokmakeup.com/cdn/shop/files/2_71ba344a-82fe-41c3-b2b1-178b119a2298.jpg?v=1745309271",
     price: "$599",
     originalPrice: "$699",
     discount: "14% OFF",
@@ -76,8 +78,8 @@ const bestSellerlItemItems: BestSellerlItem[] = [
   },
   {
     label: "Mascara",
-    imageUrl: 'https://hokmakeup.com/cdn/shop/files/5057566846028_1.jpg?v=1745309754',
-    imageUrl2: 'https://hokmakeup.com/cdn/shop/files/5057566846028_2.jpg?v=1745309754',
+    imageUrl: "https://hokmakeup.com/cdn/shop/files/5057566846028_1.jpg?v=1745309754",
+    imageUrl2: "https://hokmakeup.com/cdn/shop/files/5057566846028_2.jpg?v=1745309754",
     price: "$499",
     originalPrice: "$599",
     discount: "16% OFF",
@@ -91,14 +93,17 @@ const BestSellerCarousel: React.FC = () => {
 
   return (
     <div className="py-6 bg-white">
-      <SliderContainer>
+      <SliderContainer className={" "}>
         <div className="relative">
           {/* Header with Title and View All Link */}
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-4xl font-bold uppercase text-gray-800 text-left">
               Best Seller
             </h2>
-            <Link href="/new-arrivals" className="text-black-600 text-xs font-semibold uppercase hover:underline">
+            <Link
+              href="/new-arrivals"
+              className="text-black-600 text-xs font-semibold uppercase hover:underline"
+            >
               View All
             </Link>
           </div>
@@ -109,15 +114,15 @@ const BestSellerCarousel: React.FC = () => {
             slidesPerView={1}
             speed={600}
             onInit={(swiper) => {
-              // @ts-ignore
+              // @ts-expect-error
               swiper.params.navigation.prevEl = prevRef.current;
-              // @ts-ignore
+              // @ts-expect-error
               swiper.params.navigation.nextEl = nextRef.current;
               swiper.navigation.init();
               swiper.navigation.update();
             }}
             breakpoints={{
-              320: { slidesPerView: 1.5, spaceBetween: 8 }, // Adjusted for smaller mobile screens
+              320: { slidesPerView: 1.5, spaceBetween: 8 },
               424: { slidesPerView: 1.7, spaceBetween: 10 },
               768: { slidesPerView: 3, spaceBetween: 12 },
               1024: { slidesPerView: 5, spaceBetween: 12 },
@@ -128,14 +133,20 @@ const BestSellerCarousel: React.FC = () => {
               <SwiperSlide key={index}>
                 <div className="flex flex-col items-start relative">
                   {/* Image Container with Hover Effect */}
-                  <Link href={`/products/${item.label.toLowerCase().replace(/\s+/g, '-')}`} className="relative">
+                  <Link
+                    href={`/products/${item.label
+                      .toLowerCase()
+                      .replace(/\s+/g, "-")}`}
+                    className="relative"
+                  >
                     <div className="w-48 h-48 sm:w-52 sm:h-52 md:w-64 md:h-64 flex items-center justify-center overflow-hidden relative group">
                       <img
                         src={item.imageUrl}
                         alt={item.label}
                         className="w-full h-full object-contain transition-opacity duration-300 group-hover:opacity-0"
                         onError={(e) => {
-                          e.currentTarget.src = 'https://via.placeholder.com/150?text=' + item.label;
+                          e.currentTarget.src =
+                            "https://via.placeholder.com/150?text=" + item.label;
                         }}
                         width={310}
                         height={310}
@@ -145,7 +156,8 @@ const BestSellerCarousel: React.FC = () => {
                         alt={item.label}
                         className="w-full h-full object-contain absolute top-0 left-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                         onError={(e) => {
-                          e.currentTarget.src = 'https://via.placeholder.com/150?text=' + item.label;
+                          e.currentTarget.src =
+                            "https://via.placeholder.com/150?text=" + item.label;
                         }}
                         width={310}
                         height={310}
@@ -158,14 +170,21 @@ const BestSellerCarousel: React.FC = () => {
                   </Link>
                   {/* Product Details */}
                   <h3 className="mt-1 text-sm sm:text-sm font-medium text-gray-800 text-left leading-tight">
-                    {item.label.split(' ').slice(0, 3).join(' ')}<br />
-                    {item.label.split(' ').slice(3).join(' ')}
+                    {item.label.split(" ").slice(0, 3).join(" ")}
+                    <br />
+                    {item.label.split(" ").slice(3).join(" ")}
                   </h3>
                   {/* Price and Discount */}
                   <div className="flex items-center space-x-1 sm:space-x-2 mt-1 pt-5">
-                    <span className="text-sm sm:text-base font-semibold text-gray-800">{item.price}</span>
-                    <span className="text-sm sm:text-sm text-gray-500 line-through">{item.originalPrice}</span>
-                    <span className="text-sm sm:text-sm text-pink-500">{item.discount}</span>
+                    <span className="text-sm sm:text-base font-semibold text-gray-800">
+                      {item.price}
+                    </span>
+                    <span className="text-sm sm:text-sm text-gray-500 line-through">
+                      {item.originalPrice}
+                    </span>
+                    <span className="text-sm sm:text-sm text-pink-500">
+                      {item.discount}
+                    </span>
                   </div>
                   {/* Shade Selection */}
                   <div className="flex items-center space-x-1 mt-1">

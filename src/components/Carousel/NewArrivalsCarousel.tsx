@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React, { useRef } from "react";
@@ -5,7 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import { FaChevronLeft, FaChevronRight, FaHeart } from 'react-icons/fa';
+import { FaHeart } from 'react-icons/fa';
 import SliderContainer from "../Container/SliderContainer";
 import Link from "next/link";
 
@@ -91,7 +93,7 @@ const NewArrivalsCarousel: React.FC = () => {
 
   return (
     <div className="py-6 bg-white">
-      <SliderContainer>
+      <SliderContainer className={" "}>
         <div className="relative">
           {/* Header with Title and View All Link */}
           <div className="flex justify-between items-center mb-4">
