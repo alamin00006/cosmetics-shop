@@ -1,10 +1,11 @@
-import Header from "@/components/header/Header";
+import Banner from "@/components/header/Banner";
+
 
 export default function Home() {
   return (
     <main>
       <div>
-        <Header/>
+       <Banner/>
       </div>
     </main>
 

@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import logo from '../../assets/logo/logo.webp';
 import Image from 'next/image';
-import Container from '../Container';
-import { FiSearch, FiUser, FiHeart, FiShoppingBag, FiMenu } from 'react-icons/fi';
+import Container from '../Container/Container';
+import { FiSearch, FiMenu } from 'react-icons/fi';
 import SearchBar from './SearchBar';
 import HeaderIcons from './HeaderIcon';
 

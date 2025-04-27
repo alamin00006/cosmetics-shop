@@ -2,7 +2,7 @@
 
 import React, { useState, Dispatch, SetStateAction } from 'react';
 import Link from 'next/link';
-import Container from '../Container';
+import Container from '../Container/Container';
 import { navigation } from '@/constants';
 import { FiChevronDown, FiX, FiChevronRight, FiUser } from 'react-icons/fi';
 import clsx from 'clsx';

@@ -1,63 +1,62 @@
-export const navigation = [
+
+interface NavigationChildItem {
+    title: string;
+    href: string;
+  }
+
+  interface NavigationSubItem {
+    title: string;
+    href: string;
+    subItems?: NavigationChildItem[];
+  }
+
+  interface NavigationItem {
+    title: string;
+    href: string;
+    dropdown?: NavigationSubItem[];
+  }
+
+  export const navigation: NavigationItem[] = [
     {
-      title: "New Arrivals",
-      href: "/new-arrivals",
+      title: 'New Arrivals',
+      href: '/new-arrivals',
     },
     {
-      title: "Brands",
-      href: "/brands",
-      dropdown: [
-        { title: "Popular Brands", href: "/brands/popular" },
-        { title: "All Brands", href: "/brands/all" },
-      ],
-    },
-    {
-      title: "Makeup",
-      href: "/makeup",
-      dropdown: [
-        { title: "Face", href: "/makeup/face" },
-        { title: "Eyes", href: "/makeup/eyes" },
-        { title: "Lips", href: "/makeup/lips" },
-      ],
-    },
-    {
-      title: "Skin",
-      href: "/skin",
+      title: 'Brands',
+      href: '/brands',
       dropdown: [
         {
-          title: "Face Care",
-          href: "/skin/face-care",
+          title: 'Brand 1',
+          href: '/brand-1',
           subItems: [
-            { title: "Cleanser", href: "/skin/face-care/cleanser" },
-            { title: "Moisturizer & Creams", href: "/skin/face-care/moisturizer" },
-            { title: "Micellar Water", href: "/skin/face-care/micellar" },
-            { title: "Serums & Essence", href: "/skin/face-care/serums" },
-            { title: "Toners", href: "/skin/face-care/toners" },
+            { title: 'Product 1', href: '/brand-1/product-1' },
+            { title: 'Product 2', href: '/brand-1/product-2' },
           ],
         },
         {
-          title: "Eye Care",
-          href: "/skin/eye-care",
-          subItems: [],
-        },
-        {
-          title: "Body Care",
-          href: "/skin/body-care",
-          subItems: [],
+          title: 'Brand 2',
+          href: '/brand-2',
         },
       ],
     },
     {
-      title: "Hair",
-      href: "/hair",
+      title: 'Makeup',
+      href: '/makeup',
     },
     {
-      title: "Fragrance",
-      href: "/fragrance",
+      title: 'Skin',
+      href: '/skin',
     },
     {
-      title: "Combos & Gift Sets",
-      href: "/combos",
+      title: 'Hair',
+      href: '/hair',
+    },
+    {
+      title: 'Fragrance',
+      href: '/fragrance',
+    },
+    {
+      title: 'Combos & Gift Sets',
+      href: '/combos-gift-sets',
     },
   ];
-  
