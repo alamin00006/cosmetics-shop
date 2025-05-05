@@ -1,19 +1,16 @@
-/* eslint-disable react-hooks/rules-of-hooks */
+ 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { useRouter } from "next/navigation";
-
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import ProductThumbnails from "@/components/products/ProductThumbnails";
-import { FaStar } from "react-icons/fa";
-import { FaTrophy } from "react-icons/fa";
+import { FaStar, FaTrophy } from "react-icons/fa";
 import Link from "next/link";
 import Accordion from "@/components/products/Accordion";
 import NewArrivalsCarousel from "@/components/Carousel/NewArrivalsCarousel";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
 
 // Simulated product data (replace with API call)
 const getProductById = (id: string) => {
@@ -44,24 +41,21 @@ const getProductById = (id: string) => {
   return products.find((product) => product.id === id);
 };
 
-// eslint-disable-next-line @next/next/no-async-client-component
-export default async function ProductDetailsPage({
+export default function ProductDetailsPage({
   params,
   searchParams,
 }: {
-  params: Promise<{ id: string }>;
-  searchParams: Promise<{ id?: string }>;
+  params: { id: string };
+  searchParams: { id?: string };
 }) {
   const router = useRouter();
+  const searchParamsUnwrapped = useSearchParams();
   const [product, setProduct] = useState<any>(null);
   const [mainImage, setMainImage] = useState<string>("");
   const [quantity, setQuantity] = useState<number>(1);
   const [activeSlide, setActiveSlide] = useState(0);
 
-  const searchParamsUnwrapped = useSearchParams();
-  const resolvedParams = await params;
-  const resolvedSearchParams = await searchParams;
-  const productId = searchParamsUnwrapped.get("id") || resolvedSearchParams.id;
+  const productId = searchParamsUnwrapped.get("id") || params.id;
 
   useEffect(() => {
     if (productId) {
@@ -80,13 +74,13 @@ export default async function ProductDetailsPage({
   };
 
   const handleNextSlide = () => {
-    setActiveSlide((prev) => (prev + 1) % product.thumbnails.length);
-    setMainImage(product.thumbnails[(activeSlide + 1) % product.thumbnails.length]);
+    setActiveSlide((prev) => (prev + 1) % (product?.thumbnails?.length || 1));
+    setMainImage(product?.thumbnails[(activeSlide + 1) % (product?.thumbnails?.length || 1)] || "");
   };
 
   const handlePrevSlide = () => {
-    setActiveSlide((prev) => (prev - 1 + product.thumbnails.length) % product.thumbnails.length);
-    setMainImage(product.thumbnails[(activeSlide - 1 + product.thumbnails.length) % product.thumbnails.length]);
+    setActiveSlide((prev) => (prev - 1 + (product?.thumbnails?.length || 1)) % (product?.thumbnails?.length || 1));
+    setMainImage(product?.thumbnails[(activeSlide - 1 + (product?.thumbnails?.length || 1)) % (product?.thumbnails?.length || 1)] || "");
   };
 
   if (!product) return <div className="text-center py-10">Product not found</div>;
