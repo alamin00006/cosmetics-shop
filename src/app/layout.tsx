@@ -3,15 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header/Header";
 import Footer from "@/components/Footer";
-import CollectionCarousel from "@/components/Carousel/CollectionCarousel";
-import TopPickCarousel from "@/components/Carousel/TopPickCarousel";
-import Banner from "@/components/Banner/Banner";
-import NewArrivalsCarousel from "@/components/Carousel/NewArrivalsCarousel";
-import SquareBanner from "@/components/Banner/SquareBanner";
-import TrendsSection from "@/components/TrendsSection";
-import BrandOfTheWeekCarousel from "@/components/Carousel/BrandOfTheWeekCarousel";
-import BestSellerCarousel from "@/components/Carousel/BestSellerCarousel";
-import RewardSquareBanner from "@/components/Carousel/RewardSquareBanner";
+
 
 
 const geistSans = Geist({
@@ -42,15 +34,7 @@ export default function RootLayout({
         <Header/>
        
         {children}
-        <CollectionCarousel/>
-        <TopPickCarousel/>
-        <Banner/>
-        <NewArrivalsCarousel/>
-        <SquareBanner/>
-        <TrendsSection/>
-        <BrandOfTheWeekCarousel/>
-        <BestSellerCarousel/>
-        <RewardSquareBanner/>
+        
         <Footer/>
         
       </body>
