@@ -22,7 +22,7 @@ const SocialMedia: React.FC = () => {
   };
 
   return (
-    <Container>
+    <Container className={" "}>
       <h3 className="text-base sm:text-lg font-semibold mb-4 text-gray-800">Follow us on</h3>
       <div className="flex space-x-3 sm:space-x-4">
         {socialLinks.map((link, index) => (

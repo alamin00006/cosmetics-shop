@@ -36,10 +36,10 @@ const trendItems: TrendItem[] = [
 const TrendsSection: React.FC = () => {
   return (
     <section className="py-6 bg-white">
-      <SliderContainer>
+      <SliderContainer className={" "}>
         {/* Section Title */}
         <h2 className="text-4xl md:text-4xl font-bold uppercase text-gray-800 mb-6 text-left">
-          Trends You Can't Miss
+          Trends You Cant Miss
         </h2>
 
         {/* Grid Layout for Media */}

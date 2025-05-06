@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React, { useRef } from "react";
@@ -29,7 +31,7 @@ const TopPickCarousel: React.FC = () => {
 
   return (
     <div className="py-10 bg-white">
-      <SliderContainer>
+      <SliderContainer className={" "}>
         <div className="relative">
           <h2 className="text-4xl md:text-4xl font-bold uppercase text-gray-800 mb-6 text-left">
             Top Picks

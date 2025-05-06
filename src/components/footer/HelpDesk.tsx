@@ -15,7 +15,7 @@ const contactInfo: ContactInfo = {
 
 const HelpDesk: React.FC = () => {
   return (
-    <Container>
+    <Container className={" "}>
       <h3 className="text-lg font-semibold mb-4 text-gray-800">Help Desk</h3>
       <div className="space-y-2 text-gray-600 text-sm sm:text-base">
         <p>{contactInfo.phone}</p>

@@ -17,7 +17,7 @@ const categories: Category[] = [
 
 const Categories: React.FC = () => {
   return (
-    <Container>
+    <Container className={" "}>
       <h3 className="text-lg font-semibold mb-4 text-gray-800">Categories</h3>
       <ul className="space-y-2">
         {categories.map((category, index) => (

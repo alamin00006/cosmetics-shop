@@ -35,7 +35,7 @@ const Guarantees: React.FC = () => {
 
   return (
     <div className="bg-gray-900 py-4 text-white">
-      <Container>
+      <Container className={" "}>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-center">
           {guarantees.map((guarantee, index) => (
             <div key={index} className="flex flex-col items-center">

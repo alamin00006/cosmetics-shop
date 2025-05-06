@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import SliderContainer from "../Container/SliderContainer";
+
 
 const RewardSquareBanner: React.FC = () => {
   // Desktop video

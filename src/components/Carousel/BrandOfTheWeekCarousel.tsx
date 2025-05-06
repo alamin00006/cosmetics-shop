@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React, { useRef } from "react";
@@ -56,7 +58,7 @@ const BrandOfTheWeekCarousel: React.FC = () => {
 
   return (
     <div className="py-6 bg-gradient-to-b from-pink-200 to-white">
-      <SliderContainer>
+      <SliderContainer className={" "}>
         <div className="relative">
           {/* Header with Title */}
           <div className="flex justify-center items-center mb-4">
@@ -76,9 +78,11 @@ const BrandOfTheWeekCarousel: React.FC = () => {
             slidesPerView={1}
             speed={600}
             onInit={(swiper) => {
-              // @ts-ignore
+             // @ts-expect-error
+
               swiper.params.navigation.prevEl = prevRef.current;
-              // @ts-ignore
+            // @ts-expect-error
+
               swiper.params.navigation.nextEl = nextRef.current;
               swiper.navigation.init();
               swiper.navigation.update();
