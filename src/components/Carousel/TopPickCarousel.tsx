@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import SliderContainer from "../Container/SliderContainer";
 
 interface TopPickItem {
@@ -16,13 +16,41 @@ interface TopPickItem {
 }
 
 const topPickItems: TopPickItem[] = [
-  { label: 'FOUNDATION', imageUrl: 'https://hokmakeup.com/cdn/shop/files/Foundation_f8bf4221-88e0-4d51-9834-c70ec12cfab6.jpg?v=1744979624&width=1920' },
-  { label: 'LIP TINT', imageUrl: 'https://hokmakeup.com/cdn/shop/files/Lip_Tint_c5ec1da5-f374-4702-8789-de879aab3a24.jpg?v=1744979624&width=1920' },
-  { label: 'EYESHADOW', imageUrl: 'https://hokmakeup.com/cdn/shop/files/Blush_1c38cb28-c062-4588-9a31-6773ca875f15.jpg?v=1744979624&width=1920' },
-  { label: 'BLUSH', imageUrl: 'https://hokmakeup.com/cdn/shop/files/Eyeshadow_2a1bbe9f-c7d7-4baf-bd50-6c7d51720e9f.jpg?v=1744979624&width=1920' },
-  { label: 'SETTING SPRAY', imageUrl: 'https://hokmakeup.com/cdn/shop/files/Setting_Spray_75fde203-22f6-4312-b8a6-53c2da564adb.jpg?v=1744979624&width=1920' },
-  { label: 'LIQUID LIPSTICK', imageUrl: 'https://hokmakeup.com/cdn/shop/files/Liquid_Lipstick_c9a9a53d-1576-4087-b976-379ac7265213.jpg?v=1744979624&width=1920' },
-  { label: 'MASCARA', imageUrl: 'https://hokmakeup.com/cdn/shop/files/Mascara_20133d61-596b-473d-801e-0b6c3d173b1a.jpg?v=1744979624&width=1920' },
+  {
+    label: "FOUNDATION",
+    imageUrl:
+      "https://hokmakeup.com/cdn/shop/files/Foundation_f8bf4221-88e0-4d51-9834-c70ec12cfab6.jpg?v=1744979624&width=1920",
+  },
+  {
+    label: "LIP TINT",
+    imageUrl:
+      "https://hokmakeup.com/cdn/shop/files/Lip_Tint_c5ec1da5-f374-4702-8789-de879aab3a24.jpg?v=1744979624&width=1920",
+  },
+  {
+    label: "EYESHADOW",
+    imageUrl:
+      "https://hokmakeup.com/cdn/shop/files/Blush_1c38cb28-c062-4588-9a31-6773ca875f15.jpg?v=1744979624&width=1920",
+  },
+  {
+    label: "BLUSH",
+    imageUrl:
+      "https://hokmakeup.com/cdn/shop/files/Eyeshadow_2a1bbe9f-c7d7-4baf-bd50-6c7d51720e9f.jpg?v=1744979624&width=1920",
+  },
+  {
+    label: "SETTING SPRAY",
+    imageUrl:
+      "https://hokmakeup.com/cdn/shop/files/Setting_Spray_75fde203-22f6-4312-b8a6-53c2da564adb.jpg?v=1744979624&width=1920",
+  },
+  {
+    label: "LIQUID LIPSTICK",
+    imageUrl:
+      "https://hokmakeup.com/cdn/shop/files/Liquid_Lipstick_c9a9a53d-1576-4087-b976-379ac7265213.jpg?v=1744979624&width=1920",
+  },
+  {
+    label: "MASCARA",
+    imageUrl:
+      "https://hokmakeup.com/cdn/shop/files/Mascara_20133d61-596b-473d-801e-0b6c3d173b1a.jpg?v=1744979624&width=1920",
+  },
 ];
 
 const TopPickCarousel: React.FC = () => {
@@ -50,7 +78,7 @@ const TopPickCarousel: React.FC = () => {
               swiper.navigation.update();
             }}
             breakpoints={{
-                424: { slidesPerView: 1.7, spaceBetween: 12 }, // Gap remains unchanged
+              424: { slidesPerView: 1.7, spaceBetween: 12 }, // Gap remains unchanged
               768: { slidesPerView: 3, spaceBetween: 10 }, // Gap remains unchanged
               1024: { slidesPerView: 5, spaceBetween: 12 }, // Gap remains unchanged
             }}
@@ -66,7 +94,8 @@ const TopPickCarousel: React.FC = () => {
                       alt={item.label}
                       className="w-full h-full object-contain"
                       onError={(e) => {
-                        e.currentTarget.src = 'https://via.placeholder.com/150?text=' + item.label;
+                        e.currentTarget.src =
+                          "https://via.placeholder.com/150?text=" + item.label;
                       }}
                     />
                   </div>

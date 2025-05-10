@@ -29,46 +29,6 @@ interface Product {
 }
 
 // Simulated product data fetch (replace with API call)
-async function fetchProduct(id: string): Promise<Product | null> {
-  try {
-    // Example: Replace with actual API call to your backend
-    // const token = localStorage.getItem('token'); // Handle auth as needed
-    // const response = await fetch(`http://localhost:3000/api/products/${id}`, {
-    //   headers: { Authorization: `Bearer ${token}` },
-    // });
-    // if (!response.ok) return null;
-    // return await response.json();
-
-    const products: Product[] = [
-      {
-        id: "1",
-        name: "I Heart Revolution Bath & Body Gift Set Trio – Tropical Caramel & Blossom Bloom",
-        price: 1350,
-        image:
-          "https://hokmakeup.com/cdn/shop/files/81555229535_1.jpg?v=1745309254",
-        thumbnails: [
-          "https://hokmakeup.com/cdn/shop/files/81555229535_1.jpg?v=1745309254",
-          "https://hokmakeup.com/cdn/shop/files/81555229535_2.jpg?v=1745309254",
-        ],
-        description: "A luxurious bath and body gift set with tropical scents.",
-        rating: 0,
-        reviews: 0,
-        originalPrice: 1500,
-        discount: "10% OFF",
-        shade: "Blossom Bloom",
-        shadeImage: "https://via.placeholder.com/24/FFB6C1/000000?text=B",
-        pointsEarned: 1350,
-        sku: "SET789",
-        category: "Gift Sets",
-        tags: ["Bath", "Body", "Tropical"],
-      },
-    ];
-    return products.find((product) => product.id === id) || null;
-  } catch (error) {
-    console.error("Error fetching product:", error);
-    return null;
-  }
-}
 
 export default function ProductDetailsPage() {
   const router = useRouter();
@@ -80,12 +40,37 @@ export default function ProductDetailsPage() {
 
   const productId = (params.id as string) || searchParams.get("id") || "";
 
+  const products: Product[] = [
+    {
+      id: "1",
+      name: "I Heart Revolution Bath & Body Gift Set Trio – Tropical Caramel & Blossom Bloom",
+      price: 1350,
+      image:
+        "https://hokmakeup.com/cdn/shop/files/81555229535_1.jpg?v=1745309254",
+      thumbnails: [
+        "https://hokmakeup.com/cdn/shop/files/81555229535_1.jpg?v=1745309254",
+        "https://hokmakeup.com/cdn/shop/files/81555229535_2.jpg?v=1745309254",
+      ],
+      description: "A luxurious bath and body gift set with tropical scents.",
+      rating: 0,
+      reviews: 0,
+      originalPrice: 1500,
+      discount: "10% OFF",
+      shade: "Blossom Bloom",
+      shadeImage: "https://via.placeholder.com/24/FFB6C1/000000?text=B",
+      pointsEarned: 1350,
+      sku: "SET789",
+      category: "Gift Sets",
+      tags: ["Bath", "Body", "Tropical"],
+    },
+  ];
+
   useEffect(() => {
     async function loadProduct() {
       if (productId) {
-        const fetchedProduct = await fetchProduct(productId);
-        setProduct(fetchedProduct);
-        setMainImage(fetchedProduct?.image || "");
+        // const fetchedProduct = await fetchProduct(productId);
+        setProduct(products?.[0]);
+        setMainImage(products?.[0]?.image || "");
       }
     }
     loadProduct();
@@ -205,11 +190,11 @@ export default function ProductDetailsPage() {
           {/* Price and Discount */}
           <div className="flex flex-wrap items-center gap-1 sm:gap-2 mb-2 sm:mb-4">
             <span className="text-base sm:text-lg md:text-xl font-semibold text-gray-800">
-              ₹{product.price.toFixed(2)}
+              ৳ {product.price.toFixed(2)}
             </span>
             {product.originalPrice && (
               <span className="text-xs sm:text-sm text-gray-500 line-through">
-                ₹{product.originalPrice.toFixed(2)}
+                ৳ {product.originalPrice.toFixed(2)}
               </span>
             )}
             {product.discount && (

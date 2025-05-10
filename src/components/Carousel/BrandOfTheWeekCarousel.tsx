@@ -7,12 +7,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import SliderContainer from "../Container/SliderContainer";
 import Link from "next/link";
 
 // Define the interface for L.A. Girl items
-interface BrandOfTheWeekCarouselItem { 
+interface BrandOfTheWeekCarouselItem {
   label: string;
   description: string;
   imageUrl: string;
@@ -23,32 +23,38 @@ const brandOfTheWeekCarouselItemItems: BrandOfTheWeekCarouselItem[] = [
   {
     label: "",
     description: "",
-    imageUrl: "https://hokmakeup.com/cdn/shop/files/Correctoor-min.jpg?v=1742639361&width=1920",
+    imageUrl:
+      "https://hokmakeup.com/cdn/shop/files/Correctoor-min.jpg?v=1742639361&width=1920",
   },
   {
     label: "",
     description: "",
-    imageUrl: "https://hokmakeup.com/cdn/shop/files/Eyeliner-min.jpg?v=1742639361&width=1920",
+    imageUrl:
+      "https://hokmakeup.com/cdn/shop/files/Eyeliner-min.jpg?v=1742639361&width=1920",
   },
   {
     label: "",
     description: "",
-    imageUrl: "https://hokmakeup.com/cdn/shop/files/Lip_Oil-min.jpg?v=1742639362&width=1920",
+    imageUrl:
+      "https://hokmakeup.com/cdn/shop/files/Lip_Oil-min.jpg?v=1742639362&width=1920",
   },
   {
     label: "",
     description: "",
-    imageUrl: "https://hokmakeup.com/cdn/shop/files/Foundation-min.jpg?v=1742639362&width=1920",
+    imageUrl:
+      "https://hokmakeup.com/cdn/shop/files/Foundation-min.jpg?v=1742639362&width=1920",
   },
   {
     label: "",
     description: "",
-    imageUrl: "https://hokmakeup.com/cdn/shop/files/Cream_Blush-min.jpg?v=1742639362&width=1920",
+    imageUrl:
+      "https://hokmakeup.com/cdn/shop/files/Cream_Blush-min.jpg?v=1742639362&width=1920",
   },
   {
     label: "",
     description: "",
-    imageUrl: "https://hokmakeup.com/cdn/shop/files/Matte_Lipstick-min.jpg?v=1742639362&width=1920",
+    imageUrl:
+      "https://hokmakeup.com/cdn/shop/files/Matte_Lipstick-min.jpg?v=1742639362&width=1920",
   },
 ];
 
@@ -78,10 +84,10 @@ const BrandOfTheWeekCarousel: React.FC = () => {
             slidesPerView={1}
             speed={600}
             onInit={(swiper) => {
-             // @ts-expect-error
+              // @ts-expect-error
 
               swiper.params.navigation.prevEl = prevRef.current;
-            // @ts-expect-error
+              // @ts-expect-error
 
               swiper.params.navigation.nextEl = nextRef.current;
               swiper.navigation.init();
@@ -99,14 +105,20 @@ const BrandOfTheWeekCarousel: React.FC = () => {
               <SwiperSlide key={index}>
                 <div className="flex flex-col items-center relative">
                   {/* Image Container */}
-                  <Link href={`/products/${item.label.toLowerCase().replace(/\s+/g, '-')}`}>
+                  <Link
+                    href={`/products/details/${item.label
+                      .toLowerCase()
+                      .replace(/\s+/g, "-")}`}
+                  >
                     <div className="w-48 h-64 sm:w-52 sm:h-72 md:w-70 md:h-98 flex items-center justify-center overflow-hidden relative shadow-lg shadow-pink-100 ">
                       <img
                         src={item.imageUrl}
                         alt={item.label}
                         className="w-full h-full object-cover"
                         onError={(e) => {
-                          e.currentTarget.src = 'https://via.placeholder.com/200x300?text=' + item.label;
+                          e.currentTarget.src =
+                            "https://via.placeholder.com/200x300?text=" +
+                            item.label;
                         }}
                         width={230}
                         height={330}
