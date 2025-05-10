@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import logo from '../../assets/logo/logo.webp';
-import Image from 'next/image';
-import Container from '../Container/Container';
-import { FiSearch, FiMenu } from 'react-icons/fi';
-import SearchBar from './SearchBar';
-import HeaderIcons from './HeaderIcon';
+import React, { useState } from "react";
+import logo from "../../assets/logo/cosmetic-logo.jpeg";
+import Image from "next/image";
+import Container from "../Container/Container";
+import { FiSearch, FiMenu } from "react-icons/fi";
+import SearchBar from "./SearchBar";
+import HeaderIcons from "./HeaderIcon";
 
 interface MiddleHeaderProps {
   toggleMobileMenu: () => void;
@@ -14,11 +14,11 @@ interface MiddleHeaderProps {
 
 const MiddleHeader: React.FC<MiddleHeaderProps> = ({ toggleMobileMenu }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
   const toggleSearch = () => {
     setIsSearchOpen(!isSearchOpen);
-    setSearchTerm('');
+    setSearchTerm("");
   };
 
   return (
@@ -41,7 +41,7 @@ const MiddleHeader: React.FC<MiddleHeaderProps> = ({ toggleMobileMenu }) => {
               <Image
                 src={logo}
                 alt="logo"
-                className="h-6 sm:h-8 w-auto object-contain"
+                className="h-8 sm:h-8 w-auto object-contain"
                 priority
               />
             </div>

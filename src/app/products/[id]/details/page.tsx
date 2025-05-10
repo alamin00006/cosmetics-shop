@@ -1,10 +1,6 @@
- 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import ProductThumbnails from "@/components/products/ProductThumbnails";
 import { FaStar, FaTrophy } from "react-icons/fa";
@@ -12,57 +8,87 @@ import Link from "next/link";
 import Accordion from "@/components/products/Accordion";
 import NewArrivalsCarousel from "@/components/Carousel/NewArrivalsCarousel";
 
-// Simulated product data (replace with API call)
-const getProductById = (id: string) => {
-  const products = [
-    {
-      id: "1",
-      name: "I Heart Revolution Bath & Body Gift Set Trio – Tropical Caramel & Blossom Bloom",
-      price: 1350,
-      image: "https://hokmakeup.com/cdn/shop/files/81555229535_1.jpg?v=1745309254",
-      thumbnails: [
-        "https://hokmakeup.com/cdn/shop/files/81555229535_1.jpg?v=1745309254",
-        "https://hokmakeup.com/cdn/shop/files/81555229535_2.jpg?v=1745309254",
-      ],
-      description: "A luxurious bath and body gift set with tropical scents.",
-      rating: 0,
-      reviews: 0,
-      originalPrice: 1500,
-      discount: "10% OFF",
-      shade: "Blossom Bloom",
-      shadeImage: "https://via.placeholder.com/24/FFB6C1/000000?text=B",
-      pointsEarned: 1350,
-      sku: "SET789",
-      category: "Gift Sets",
-      tags: ["Bath", "Body", "Tropical"],
-    },
-    // Add other products as needed
-  ];
-  return products.find((product) => product.id === id);
-};
+// Define Product interface for type safety
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  image: string;
+  thumbnails: string[];
+  description: string;
+  rating: number;
+  reviews: number;
+  originalPrice?: number;
+  discount?: string;
+  shade?: string;
+  shadeImage?: string;
+  pointsEarned: number;
+  sku: string;
+  category: string;
+  tags: string[];
+}
 
-export default function ProductDetailsPage({
-  params,
-  searchParams,
-}: {
-  params: { id: string };
-  searchParams: { id?: string };
-}) {
+// Simulated product data fetch (replace with API call)
+async function fetchProduct(id: string): Promise<Product | null> {
+  try {
+    // Example: Replace with actual API call to your backend
+    // const token = localStorage.getItem('token'); // Handle auth as needed
+    // const response = await fetch(`http://localhost:3000/api/products/${id}`, {
+    //   headers: { Authorization: `Bearer ${token}` },
+    // });
+    // if (!response.ok) return null;
+    // return await response.json();
+
+    const products: Product[] = [
+      {
+        id: "1",
+        name: "I Heart Revolution Bath & Body Gift Set Trio – Tropical Caramel & Blossom Bloom",
+        price: 1350,
+        image:
+          "https://hokmakeup.com/cdn/shop/files/81555229535_1.jpg?v=1745309254",
+        thumbnails: [
+          "https://hokmakeup.com/cdn/shop/files/81555229535_1.jpg?v=1745309254",
+          "https://hokmakeup.com/cdn/shop/files/81555229535_2.jpg?v=1745309254",
+        ],
+        description: "A luxurious bath and body gift set with tropical scents.",
+        rating: 0,
+        reviews: 0,
+        originalPrice: 1500,
+        discount: "10% OFF",
+        shade: "Blossom Bloom",
+        shadeImage: "https://via.placeholder.com/24/FFB6C1/000000?text=B",
+        pointsEarned: 1350,
+        sku: "SET789",
+        category: "Gift Sets",
+        tags: ["Bath", "Body", "Tropical"],
+      },
+    ];
+    return products.find((product) => product.id === id) || null;
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    return null;
+  }
+}
+
+export default function ProductDetailsPage() {
   const router = useRouter();
-  const searchParamsUnwrapped = useSearchParams();
-  const [product, setProduct] = useState<any>(null);
+  const params = useParams();
+  const searchParams = useSearchParams();
+  const [product, setProduct] = useState<Product | null>(null);
   const [mainImage, setMainImage] = useState<string>("");
   const [quantity, setQuantity] = useState<number>(1);
-  const [activeSlide, setActiveSlide] = useState(0);
 
-  const productId = searchParamsUnwrapped.get("id") || params.id;
+  const productId = (params.id as string) || searchParams.get("id") || "";
 
   useEffect(() => {
-    if (productId) {
-      const fetchedProduct = getProductById(productId);
-      setProduct(fetchedProduct || null);
-      setMainImage(fetchedProduct?.image || "");
+    async function loadProduct() {
+      if (productId) {
+        const fetchedProduct = await fetchProduct(productId);
+        setProduct(fetchedProduct);
+        setMainImage(fetchedProduct?.image || "");
+      }
     }
+    loadProduct();
   }, [productId]);
 
   const handleThumbnailClick = (image: string) => {
@@ -73,31 +99,26 @@ export default function ProductDetailsPage({
     setQuantity((prev) => Math.max(1, prev + delta));
   };
 
-  const handleNextSlide = () => {
-    setActiveSlide((prev) => (prev + 1) % (product?.thumbnails?.length || 1));
-    setMainImage(product?.thumbnails[(activeSlide + 1) % (product?.thumbnails?.length || 1)] || "");
-  };
-
-  const handlePrevSlide = () => {
-    setActiveSlide((prev) => (prev - 1 + (product?.thumbnails?.length || 1)) % (product?.thumbnails?.length || 1));
-    setMainImage(product?.thumbnails[(activeSlide - 1 + (product?.thumbnails?.length || 1)) % (product?.thumbnails?.length || 1)] || "");
-  };
-
-  if (!product) return <div className="text-center py-10">Product not found</div>;
+  if (!product) {
+    return <div className="text-center py-10">Product not found</div>;
+  }
 
   // Sample accordion items
   const accordionItems = [
     {
       title: "Details",
-      content: "Free shipping on orders above ₹799. Delivery within 3-5 business days.",
+      content:
+        "Free shipping on orders above ₹799. Delivery within 3-5 business days.",
     },
     {
       title: "How To Use",
-      content: "Returns accepted within 14 days of delivery. Item must be unused and in original packaging.",
+      content:
+        "Returns accepted within 14 days of delivery. Item must be unused and in original packaging.",
     },
     {
       title: "Ingredients",
-      content: "Store in a cool, dry place. Avoid direct sunlight. Use within 12 months of opening.",
+      content:
+        "Store in a cool, dry place. Avoid direct sunlight. Use within 12 months of opening.",
     },
   ];
 
@@ -107,78 +128,56 @@ export default function ProductDetailsPage({
       <div className="text-xs sm:text-sm text-gray-500 mb-2 sm:mb-4">
         <Link href="/" className="hover:underline">
           Home
-        </Link>
+        </Link>{" "}
+        /{" "}
         <Link href="/products" className="hover:underline">
-          Gift Sets
-        </Link>
-        <span className="text-gray-800">{product.name}</span>
+          {product.category}
+        </Link>{" "}
+        / <span className="text-gray-800">{product.name}</span>
       </div>
 
       {/* Product Layout */}
       <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 md:gap-6 lg:gap-8">
         {/* Image Section */}
         <div className="w-full sm:w-1/2">
-          {/* Slider for Mobile */}
+          {/* Mobile Slider */}
           <div className="sm:hidden">
-            <div className="relative">
-              <div className="overflow-hidden">
-                <div className="flex" style={{ transform: `translateX(-${activeSlide * 100}%)`, transition: 'transform 0.3s ease-in-out' }}>
-                  {product.thumbnails.map((thumbnail: string, index: number) => (
-                    <img
-                      key={index}
-                      src={thumbnail}
-                      alt={`Slide ${index + 1}`}
-                      className="w-full h-[200px] object-cover rounded-lg"
-                      onError={(e) => {
-                        e.currentTarget.src = `https://via.placeholder.com/400?text=Slide ${index + 1}`;
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
-              <button
-                onClick={handlePrevSlide}
-                className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-1 rounded-full"
-              >
-                &lt;
-              </button>
-              <button
-                onClick={handleNextSlide}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-1 rounded-full"
-              >
-                &gt;
-              </button>
-            </div>
+            <ProductThumbnails
+              thumbnails={product.thumbnails}
+              onThumbnailClick={handleThumbnailClick}
+              mainImage={mainImage}
+            />
           </div>
-
-          {/* Regular Layout for sm and above */}
-          <div className="hidden sm:block">
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
-              {/* Thumbnails */}
-              <div className="sm:w-20 w-full order-1 sm:order-none">
-                <ProductThumbnails
-                  thumbnails={product.thumbnails}
-                  onThumbnailClick={handleThumbnailClick}
-                />
-              </div>
-              {/* Main Image */}
-              <div className="w-full sm:w-auto flex-1">
-                <img
-                  src={mainImage}
-                  alt={product.name}
-                  className="w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[400px] object-cover rounded-lg"
-                  onError={(e) => {
-                    e.currentTarget.src = `https://via.placeholder.com/400?text=${product.name}`;
-                  }}
-                />
-              </div>
+          {/* Desktop Layout */}
+          <div className="hidden sm:flex sm:flex-row gap-2 sm:gap-4">
+            {/* Thumbnails */}
+            <div className="sm:w-20 w-full order-1 sm:order-none">
+              <ProductThumbnails
+                thumbnails={product.thumbnails}
+                onThumbnailClick={handleThumbnailClick}
+                mainImage={mainImage}
+              />
+            </div>
+            {/* Main Image */}
+            <div className="w-full sm:w-auto flex-1">
+              {/* Consider using next/image for optimization */}
+              <img
+                src={mainImage}
+                alt={product.name}
+                className="w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[400px] object-cover rounded-lg"
+                onError={(e) => {
+                  e.currentTarget.src = `https://via.placeholder.com/400?text=${product.name}`;
+                }}
+              />
             </div>
           </div>
         </div>
 
         {/* Product Details */}
         <div className="w-full sm:w-1/2 mt-4 sm:mt-0">
-          <h1 className="text-lg sm:text-xl md:text-2xl font-bold mb-2">{product.name}</h1>
+          <h1 className="text-lg sm:text-xl md:text-2xl font-bold mb-2">
+            {product.name}
+          </h1>
 
           {/* Rating and Reviews */}
           <div className="flex items-center mb-2">
@@ -195,7 +194,11 @@ export default function ProductDetailsPage({
               ))}
             </div>
             <span className="ml-1 sm:ml-2 text-xs sm:text-sm text-gray-500">
-              ({product.reviews === 0 ? "No reviews" : `${product.reviews} reviews`})
+              (
+              {product.reviews === 0
+                ? "No reviews"
+                : `${product.reviews} reviews`}
+              )
             </span>
           </div>
 
@@ -210,7 +213,9 @@ export default function ProductDetailsPage({
               </span>
             )}
             {product.discount && (
-              <span className="text-xs sm:text-sm text-pink-500">{product.discount}</span>
+              <span className="text-xs sm:text-sm text-pink-500">
+                {product.discount}
+              </span>
             )}
             <span className="text-xs text-gray-500">
               Inclusive of All Taxes
@@ -289,8 +294,6 @@ export default function ProductDetailsPage({
                 </button>
               </div>
             </div>
-
-            {/* Add to Bag Button */}
             <button className="w-full sm:w-[200px] bg-black text-white py-1 sm:py-2 rounded text-xs sm:text-sm font-semibold uppercase hover:bg-gray-800">
               ADD TO BAG
             </button>
