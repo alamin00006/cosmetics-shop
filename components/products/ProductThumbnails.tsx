@@ -12,7 +12,7 @@ const ProductThumbnails: React.FC<ProductThumbnailsProps> = ({
   mainImage,
 }) => {
   return (
-    <div className="flex flex-col space-y-2">
+    <div className="flex gap-2 overflow-x-auto scrollbar-hide">
       {thumbnails.map((thumbnail, index) => (
         <img
           key={index}
