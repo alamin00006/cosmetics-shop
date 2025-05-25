@@ -2,11 +2,16 @@
 
 import { useRouter, useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import Image from "next/image"; // Import Next.js Image component
 import ProductThumbnails from "@/components/products/ProductThumbnails";
 import { FaStar, FaTrophy } from "react-icons/fa";
 import Link from "next/link";
 import Accordion from "@/components/products/Accordion";
 import NewArrivalsCarousel from "@/components/Carousel/NewArrivalsCarousel";
+import Image1 from "../../../../assets/image/image-1.webp";
+import Image2 from "../../../../assets/image/image-2.webp";
+import Image3 from "../../../../assets/image/image-3.webp";
+import Image4 from "../../../../assets/image/image-4.webp";
 
 // Define Product interface for type safety
 interface Product {
@@ -14,7 +19,6 @@ interface Product {
   name: string;
   price: number;
   image: string;
-  thumbnails: string[];
   description: string;
   rating: number;
   reviews: number;
@@ -50,16 +54,7 @@ export default function ProductDetailsPage() {
       id: "1",
       name: "I Heart Revolution Bath & Body Gift Set Trio – Tropical Caramel & Blossom Bloom",
       price: 1350,
-      image:
-        "https://hokmakeup.com/cdn/shop/files/81555229535_1.jpg?v=1745309254",
-      thumbnails: [
-        "https://hokmakeup.com/cdn/shop/files/81555229535_1.jpg?v=1745309254",
-        "https://hokmakeup.com/cdn/shop/files/81555229535_2.jpg?v=1745309254",
-      ],
-      images: [
-        "https://hokmakeup.com/cdn/shop/files/81555229535_1.jpg?v=1745309254",
-        "https://hokmakeup.com/cdn/shop/files/81555229535_2.jpg?v=1745309254",
-      ],
+      image: Image1.src, // Fallback main image
       description: "A luxurious bath and body gift set with tropical scents.",
       rating: 0,
       reviews: 0,
@@ -76,51 +71,47 @@ export default function ProductDetailsPage() {
           id: "blue-401",
           name: "Blue-401",
           color: "#4682B4",
-          image: "https://via.placeholder.com/300x400?text=Blue+Gift+Set",
+          image: Image1.src,
         },
         {
           id: "pink-402",
           name: "Pink-402",
           color: "#FF69B4",
-          image: "https://via.placeholder.com/300x400?text=Pink+Gift+Set",
+          image: Image2.src,
         },
         {
           id: "orange-403",
           name: "Orange-403",
           color: "#FFA500",
-          image: "https://via.placeholder.com/300x400?text=Orange+Gift+Set",
+          image: Image3.src,
         },
         {
           id: "purple-404",
           name: "Purple-404",
           color: "#800080",
-          image: "https://via.placeholder.com/300x400?text=Purple+Gift+Set",
+          image: Image4.src,
         },
         {
           id: "yellow-405",
           name: "Yellow-405",
           color: "#FFFF00",
-          image: "https://via.placeholder.com/300x400?text=Yellow+Gift+Set",
+          image: Image4.src,
         },
         {
           id: "green-406",
           name: "Green-406",
           color: "#32CD32",
-          image: "https://via.placeholder.com/300x400?text=Green+Gift+Set",
+          image: Image4.src,
         },
         {
           id: "white-407",
           name: "White-407",
           color: "#FFFFFF",
-          image: "https://via.placeholder.com/300x400?text=White+Gift+Set",
+          image: Image4.src,
         },
-        {
-          id: "red-408",
-          name: "Red-408",
-          color: "#FF0000",
-          image: "https://via.placeholder.com/300x400?text=Red+Gift+Set",
-        },
+        { id: "red-408", name: "Red-408", color: "#FF0000", image: Image2.src },
       ],
+      images: [Image1.src, Image2.src, Image3.src, Image4.src],
       offers: [
         "Extra ₹100 OFF on orders ₹750+",
         "Extra ₹150 OFF on orders ₹1200+",
@@ -133,18 +124,23 @@ export default function ProductDetailsPage() {
 
   useEffect(() => {
     async function loadProduct() {
-      if (productId) {
-        const fetchedProduct = products.find((p) => p.id === productId);
-        setProduct(products[0]);
-        setMainImage(products[0]?.images[0] || "");
-        setSelectedColor(products[0]?.colors[0]?.id || "");
-      }
+      const fetchedProduct = products.find((p) => p.id === productId);
+
+      setProduct(products[0]); // Use the first product for demonstration
+      setSelectedColor(products[0].colors[0]?.id || "");
+      setMainImage(products[0].colors[0]?.image || products[0].images[0] || "");
+      setCurrentImageIndex(0);
     }
+
     loadProduct();
   }, [productId]);
 
   const handleThumbnailClick = (image: string) => {
-    setMainImage(image);
+    if (product) {
+      const index = product.images.indexOf(image);
+      setMainImage(image);
+      setCurrentImageIndex(index !== -1 ? index : 0);
+    }
   };
 
   const handleQuantityChange = (change: number) => {
@@ -153,21 +149,30 @@ export default function ProductDetailsPage() {
 
   const handleColorChange = (colorId: string) => {
     setSelectedColor(colorId);
+    const selectedColorObj = product?.colors.find((c) => c.id === colorId);
+    if (selectedColorObj) {
+      setMainImage(selectedColorObj.image);
+      setCurrentImageIndex(0); // Reset index for color-specific image
+    }
   };
 
   const handleNextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % product?.images.length!);
-    setMainImage(product?.images[currentImageIndex + 1] || product?.images[0]!);
+    if (product) {
+      const newIndex = (currentImageIndex + 1) % product.images.length;
+      setCurrentImageIndex(newIndex);
+      setMainImage(product.images[newIndex]);
+    }
   };
 
   const handlePrevImage = () => {
-    setCurrentImageIndex((prev) =>
-      prev === 0 ? product?.images.length! - 1 : prev - 1
-    );
-    setMainImage(
-      product?.images[currentImageIndex - 1] ||
-        product?.images[product?.images.length! - 1]!
-    );
+    if (product) {
+      const newIndex =
+        currentImageIndex === 0
+          ? product.images.length - 1
+          : currentImageIndex - 1;
+      setCurrentImageIndex(newIndex);
+      setMainImage(product.images[newIndex]);
+    }
   };
 
   if (!product) {
@@ -192,47 +197,27 @@ export default function ProductDetailsPage() {
 
   return (
     <main className="max-w-7xl mx-auto px-4 py-8">
-      {/* Breadcrumb Navigation */}
-      <div className="text-sm text-gray-500 mb-4">
-        <Link href="/" className="hover:underline">
-          Home
-        </Link>{" "}
-        /{" "}
-        <Link href="/products" className="hover:underline">
-          {product.category}
-        </Link>{" "}
-        / <span className="text-gray-800">{product.name}</span>
-      </div>
-
       {/* Product Layout */}
       <div className="flex flex-col md:flex-row gap-6">
         {/* Image Section */}
         <div className="w-full md:w-1/2">
           <div className="relative">
-            <img
+            <Image
               src={mainImage}
               alt={product.name}
+              width={500}
+              height={500}
               className="w-full h-auto rounded-lg shadow-md"
-              onError={(e) => {
-                e.currentTarget.src = `https://via.placeholder.com/400?text=${product.name}`;
-              }}
+              onError={() =>
+                setMainImage(
+                  `https://via.placeholder.com/400?text=${product.name}`
+                )
+              }
             />
-            <button
-              onClick={handlePrevImage}
-              className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rounded-full"
-            >
-              &lt;
-            </button>
-            <button
-              onClick={handleNextImage}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rounded-full"
-            >
-              &gt;
-            </button>
           </div>
           <div className="mt-4">
             <ProductThumbnails
-              thumbnails={product.thumbnails}
+              thumbnails={product.images}
               onThumbnailClick={handleThumbnailClick}
               mainImage={mainImage}
             />
@@ -248,11 +233,7 @@ export default function ProductDetailsPage() {
             {[...Array(5)].map((_, i) => (
               <FaStar
                 key={i}
-                className={`w-4 h-4 ${
-                  i < Math.floor(product.rating)
-                    ? "text-yellow-400"
-                    : "text-gray-300"
-                }`}
+                className={`w-4 h-4 ${i < Math.floor(product.rating) ? "text-yellow-400" : "text-gray-300"}`}
               />
             ))}
             <span className="ml-2 text-sm text-gray-500">
@@ -294,7 +275,9 @@ export default function ProductDetailsPage() {
           {/* Shade Selection */}
           <div className="mb-4">
             <h3 className="text-sm font-medium text-gray-600 mb-2">
-              Shade: {product.colors.find((c) => c.id === selectedColor)?.name}
+              Shade:{" "}
+              {product.colors.find((c) => c.id === selectedColor)?.name ||
+                "Select a shade"}
             </h3>
             <div className="flex gap-2">
               {product.colors.map((color) => (
@@ -307,6 +290,7 @@ export default function ProductDetailsPage() {
                       : "border-transparent"
                   }`}
                   style={{ backgroundColor: color.color }}
+                  aria-label={`Select ${color.name}`}
                 />
               ))}
             </div>
@@ -335,6 +319,7 @@ export default function ProductDetailsPage() {
               <button
                 onClick={() => handleQuantityChange(-1)}
                 className="px-2 py-1 border border-gray-300 rounded-l text-gray-600 hover:bg-gray-100"
+                aria-label="Decrease quantity"
               >
                 -
               </button>
@@ -344,11 +329,19 @@ export default function ProductDetailsPage() {
               <button
                 onClick={() => handleQuantityChange(1)}
                 className="px-2 py-1 border border-gray-300 rounded-r text-gray-600 hover:bg-gray-100"
+                aria-label="Increase quantity"
               >
                 +
               </button>
             </div>
-            <button className="w-full bg-black text-white py-2 rounded text-sm font-semibold uppercase hover:bg-gray-800">
+            <button
+              className="w-full bg-black text-white py-2 rounded text-sm font-semibold uppercase hover:bg-gray-800"
+              onClick={() =>
+                console.log(
+                  `Added ${quantity} of ${product.name} (Color: ${selectedColor}) to cart`
+                )
+              }
+            >
               ADD TO BAG
             </button>
           </div>
@@ -373,6 +366,7 @@ export default function ProductDetailsPage() {
           <button
             className="text-sm text-gray-600 hover:underline"
             onClick={() => router.back()}
+            aria-label="Back to products"
           >
             Back to Products
           </button>
