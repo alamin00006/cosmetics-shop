@@ -3,13 +3,12 @@ import { Metadata, Viewport } from "next";
 
 import clsx from "clsx";
 
-import { Providers } from "./providers";
-
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 
 import Header from "@/components/header/Header";
 import Footer from "@/components/Footer";
+import { DesignProvider } from "./providers";
 
 export const metadata: Metadata = {
   title: {
@@ -43,13 +42,16 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
+        <DesignProvider
+          themeProps={{ attribute: "class", defaultTheme: "light" }}
+        >
+          <Provider>{children}</Provider>
           <Header />
 
           {children}
 
           <Footer />
-        </Providers>
+        </DesignProvider>
       </body>
     </html>
   );
