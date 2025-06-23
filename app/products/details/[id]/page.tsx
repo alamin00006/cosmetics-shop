@@ -210,7 +210,7 @@ export default function ProductDetailsPage() {
               className="w-full h-auto rounded-lg shadow-md"
               onError={() =>
                 setMainImage(
-                  `https://via.placeholder.com/400?text=${product.name}`
+                  `https://via.placeholder.com/400?text=${product.name}`,
                 )
               }
             />
@@ -338,7 +338,7 @@ export default function ProductDetailsPage() {
               className="w-full bg-black text-white py-2 rounded text-sm font-semibold uppercase hover:bg-gray-800"
               onClick={() =>
                 console.log(
-                  `Added ${quantity} of ${product.name} (Color: ${selectedColor}) to cart`
+                  `Added ${quantity} of ${product.name} (Color: ${selectedColor}) to cart`,
                 )
               }
             >

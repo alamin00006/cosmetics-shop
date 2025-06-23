@@ -1,18 +1,21 @@
-'use client';
+"use client";
 
-import React, { useState, Dispatch, SetStateAction } from 'react';
-import Link from 'next/link';
-import Container from '../Container/Container';
-import { navigation } from '@/constants';
-import { FiChevronDown, FiX, FiChevronRight, FiUser } from 'react-icons/fi';
-import clsx from 'clsx';
+import React, { useState, Dispatch, SetStateAction } from "react";
+import Link from "next/link";
+import Container from "../Container/Container";
+import { navigation } from "@/constants";
+import { FiChevronDown, FiX, FiChevronRight, FiUser } from "react-icons/fi";
+import clsx from "clsx";
 
 interface BottomHeaderProps {
   isMobileMenuOpen: boolean;
   setIsMobileMenuOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const BottomHeader: React.FC<BottomHeaderProps> = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
+const BottomHeader: React.FC<BottomHeaderProps> = ({
+  isMobileMenuOpen,
+  setIsMobileMenuOpen,
+}) => {
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
   const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
 
@@ -49,7 +52,10 @@ const BottomHeader: React.FC<BottomHeaderProps> = ({ isMobileMenuOpen, setIsMobi
               {item.dropdown && hoveredMenu === item.title && (
                 <div className="absolute top-full left-0 mt-2 w-64 bg-white shadow-md border border-gray-200 z-50">
                   {item.dropdown.map((subItem, subIndex) => (
-                    <div key={subIndex} className="group relative text-gray-500">
+                    <div
+                      key={subIndex}
+                      className="group relative text-gray-500"
+                    >
                       <Link
                         href={subItem.href}
                         className="block px-4 py-2 text-sm hover:bg-gray-100 font-medium text-gray-500"
@@ -104,7 +110,9 @@ const BottomHeader: React.FC<BottomHeaderProps> = ({ isMobileMenuOpen, setIsMobi
                     <Link
                       href={item.href}
                       className="flex-1"
-                      onClick={() => !item.dropdown && setIsMobileMenuOpen(false)}
+                      onClick={() =>
+                        !item.dropdown && setIsMobileMenuOpen(false)
+                      }
                     >
                       {item.title}
                     </Link>
@@ -112,8 +120,8 @@ const BottomHeader: React.FC<BottomHeaderProps> = ({ isMobileMenuOpen, setIsMobi
                       <FiChevronRight
                         size={20}
                         className={clsx(
-                          'transition-transform',
-                          expandedMenu === item.title && 'rotate-90'
+                          "transition-transform",
+                          expandedMenu === item.title && "rotate-90",
                         )}
                       />
                     )}
