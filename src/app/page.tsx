@@ -1,14 +1,14 @@
 "use client";
-import Banner from "@/components/header/Banner";
-import CollectionCarousel from "@/components/Carousel/CollectionCarousel";
-import TopPickCarousel from "@/components/Carousel/TopPickCarousel";
 
-import NewArrivalsCarousel from "@/components/Carousel/NewArrivalsCarousel";
-import SquareBanner from "@/components/Banner/SquareBanner";
-import TrendsSection from "@/components/TrendsSection";
-import BrandOfTheWeekCarousel from "@/components/Carousel/BrandOfTheWeekCarousel";
-import BestSellerCarousel from "@/components/Carousel/BestSellerCarousel";
-import RewardSquareBanner from "@/components/Carousel/RewardSquareBanner";
+import Banner from "../components/Banner/Banner";
+import SquareBanner from "../components/Banner/SquareBanner";
+import BestSellerCarousel from "../components/Carousel/BestSellerCarousel";
+import BrandOfTheWeekCarousel from "../components/Carousel/BrandOfTheWeekCarousel";
+import CollectionCarousel from "../components/Carousel/CollectionCarousel";
+import NewArrivalsCarousel from "../components/Carousel/NewArrivalsCarousel";
+import RewardSquareBanner from "../components/Carousel/RewardSquareBanner";
+import TopPickCarousel from "../components/Carousel/TopPickCarousel";
+import TrendsSection from "../components/TrendsSection";
 
 export interface BestSellerlItem {
   label: string;
